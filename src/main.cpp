@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 
+#include "brainF.h"
+#include "scislBF.h"
+
 void usage() {
 
 }
@@ -17,7 +20,7 @@ std::string fileToString(std::ifstream& file) {
 	size_t size = file.tellg();
 	file.seekg(0, file.beg);
 
-	opt.reserve(size);
+	opt.resize(size);
 	file.read(opt.data(), size);
 
 	return opt;
