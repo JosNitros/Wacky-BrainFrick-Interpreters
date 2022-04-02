@@ -152,6 +152,7 @@
     <ClCompile Include="scisl\runtime\stlOptimizations.cpp" />
     <ClCompile Include="src\brainF.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scislBF.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scisl\common.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="scisl\runtime\stl.h" />
     <ClInclude Include="scisl\runtime\stlOptimizations.h" />
     <ClInclude Include="src\brainF.h" />
+    <ClInclude Include="src\scislBF.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
