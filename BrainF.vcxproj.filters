@@ -26,9 +26,6 @@
     <ClCompile Include="scisl\common.cpp">
       <Filter>scisl</Filter>
     </ClCompile>
-    <ClCompile Include="scisl\example.cpp">
-      <Filter>scisl</Filter>
-    </ClCompile>
     <ClCompile Include="scisl\compiler\compiler.cpp">
       <Filter>scisl\compiler</Filter>
     </ClCompile>
@@ -102,5 +99,8 @@
     <None Include="src\bf.scisl">
       <Filter>Resource Files</Filter>
     </None>
+    <Text Include="test.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -32,6 +32,23 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
+	// Last argument is a filename which we open
 
+	std::ifstream file;
+	file.open(argv[argc - 1]);
+	
+	
+	if (file.is_open()) {
+		// Read input from file
+		std::string asString = fileToString(file);
+		std::cout << asString + "\n";
+		std::cout << "THIS SERVER LITTY DEAD ON A POGGER\n";
+	}
 
+	else {
+		std::cout << "Please enter a valid file name.\n";
+		return -1;
+	}
+
+	return 0;
 }
