@@ -3,7 +3,7 @@
 
 #include <string>
 
-int runScislBF(const std::string& ipt);
+int runScislBF(std::string& ipt);
 
 
 

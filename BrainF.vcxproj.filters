@@ -96,6 +96,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\bf.scisl">
+      <Filter>Resource Files</Filter>
+    </None>
     <Text Include="test.txt">
       <Filter>Source Files</Filter>
     </Text>

@@ -1,6 +1,9 @@
 #include <iostream>
 #include <fstream>
 
+#include "brainF.h"
+#include "scislBF.h"
+
 void usage() {
 
 }

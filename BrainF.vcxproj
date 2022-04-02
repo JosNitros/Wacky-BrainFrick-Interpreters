@@ -167,6 +167,7 @@
     <ClInclude Include="src\scislBF.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\bf.scisl" />
     <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
