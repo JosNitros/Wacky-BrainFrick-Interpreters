@@ -13,5 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="scisl">
+      <UniqueIdentifier>{3c84064a-c00a-44a3-bea8-8df4a7ca24c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scisl\compiler">
+      <UniqueIdentifier>{566be8dd-031c-40f0-8ee9-3c5afd2a0c78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scisl\runtime">
+      <UniqueIdentifier>{df603bcd-5e47-4c87-b33d-7a6621423205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scisl\interoperability">
+      <UniqueIdentifier>{6c351882-af25-4c45-a88e-eb7931fd9d40}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="scisl\common.cpp">
+      <Filter>scisl</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\example.cpp">
+      <Filter>scisl</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\compiler\compiler.cpp">
+      <Filter>scisl\compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\compiler\compilerOptimizations.cpp">
+      <Filter>scisl\compiler</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\interoperability\tables.cpp">
+      <Filter>scisl\interoperability</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\runtime\args.cpp">
+      <Filter>scisl\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\runtime\instruction.cpp">
+      <Filter>scisl\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\runtime\program.cpp">
+      <Filter>scisl\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\runtime\stl.cpp">
+      <Filter>scisl\runtime</Filter>
+    </ClCompile>
+    <ClCompile Include="scisl\runtime\stlOptimizations.cpp">
+      <Filter>scisl\runtime</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scisl\common.h">
+      <Filter>scisl</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\compiler\compiler.h">
+      <Filter>scisl\compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\compiler\compilerOptimizations.h">
+      <Filter>scisl\compiler</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\interoperability\tables.h">
+      <Filter>scisl\interoperability</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\runtime\args.h">
+      <Filter>scisl\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\runtime\instruction.h">
+      <Filter>scisl\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\runtime\program.h">
+      <Filter>scisl\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\runtime\stl.h">
+      <Filter>scisl\runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="scisl\runtime\stlOptimizations.h">
+      <Filter>scisl\runtime</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
