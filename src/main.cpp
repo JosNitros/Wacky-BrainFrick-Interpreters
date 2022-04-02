@@ -1,11 +1,30 @@
 #include <iostream>
+#include <fstream>
 
 void usage() {
 
 }
 
+std::string fileToString(std::ifstream& file) {
+	std::string opt = "";
+
+	if (!file.is_open()) {
+		return "";
+	}
+
+	//thanks cppreference https://www.cplusplus.com/reference/istream/istream/seekg/
+	file.seekg(0, file.end);
+	size_t size = file.tellg();
+	file.seekg(0, file.beg);
+
+	opt.reserve(size);
+	file.read(opt.data(), size);
+
+	return opt;
+}
+
 int main(int argc, char* argv[]) {
-	if (argc <= 0) {
+	if (argc <= 1) {
 		usage();
 		return 0;
 	}
