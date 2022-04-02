@@ -143,7 +143,6 @@
     <ClCompile Include="scisl\common.cpp" />
     <ClCompile Include="scisl\compiler\compiler.cpp" />
     <ClCompile Include="scisl\compiler\compilerOptimizations.cpp" />
-    <ClCompile Include="scisl\example.cpp" />
     <ClCompile Include="scisl\interoperability\tables.cpp" />
     <ClCompile Include="scisl\runtime\args.cpp" />
     <ClCompile Include="scisl\runtime\instruction.cpp" />
@@ -166,6 +165,9 @@
     <ClInclude Include="scisl\runtime\stlOptimizations.h" />
     <ClInclude Include="src\brainF.h" />
     <ClInclude Include="src\scislBF.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
