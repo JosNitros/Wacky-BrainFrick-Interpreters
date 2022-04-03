@@ -26,6 +26,35 @@ std::string fileToString(std::ifstream& file) {
 	return opt;
 }
 
+
+const unsigned char hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1 = 0x1E;
+const unsigned char hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2 = 0xE7;
+
+// Nobody will ever figure out how to undo this encryption, it's too good
+void encrypt(std::string& ipt)
+{
+	for (unsigned int i = 0; i < ipt.size(); i++) {
+		if (i % 2 == 0) {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1;
+		}
+		else {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2;
+		}
+	}	
+}
+
+void decrypt(std::string& ipt)
+{
+	for (unsigned int i = 0; i < ipt.size(); i++) {
+		if (i % 2 == 0) {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1;
+		}
+		else {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2;
+		}
+	}
+}
+
 int main(int argc, char* argv[]) {
 	if (argc <= 1) {
 		usage();
@@ -37,12 +66,19 @@ int main(int argc, char* argv[]) {
 	std::ifstream file;
 	file.open(argv[argc - 1]);
 	
-	
+	std::ifstream encrypted("src/ENCRYPTEDbf.scisl");
+	std::string encryptedAndSecret = fileToString(encrypted);
+	decrypt(encryptedAndSecret);
+	std::ofstream decrypted("NOTdecrypted.scisl");
+	decrypted << encryptedAndSecret;
+	decrypted.close();
+
 	if (file.is_open()) {
 		// Read input from file
 		std::string asString = fileToString(file);
+		file.close();
 		iterateString(asString);
-    return runScislBF(asString);
+		return runScislBF(asString);
 	}
 
 	else {

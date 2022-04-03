@@ -59,7 +59,8 @@ int initScisl() {
 	scisl::registerFunc("pop", pop, 2, 2, "si", scisl::type::error, SCISL_F_NO_JMP);
 	scisl::registerFunc("push", push, 2, 2, "si", scisl::type::error, SCISL_F_NO_JMP);
 
-	bf = scisl::compile("src/bf.scisl");
+	bf = scisl::compile("NOTdecrypted.scisl");
+	std::remove("NOTdecrypted.scisl");
 
 	if (bf == nullptr) return -1;
 	bf->decompile("src/DECOMP_bf.scisl");
