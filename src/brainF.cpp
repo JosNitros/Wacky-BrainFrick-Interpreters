@@ -3,10 +3,13 @@
 #include <fstream>
 #include <stack>
 
-void runCppBF(std::string inputString) {
+#include "common.h"
+
+// BIG stack
+void runCppBF(std::string& inputString) {
 	//Initialize buffer
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/Brainfuck
-	char array[30000] = {0};
+	char array[BF_MEM_SIZE] = {0};
 	char* ptr = array;
 	int lastIndex = inputString.length() - 1;
 	int currentIndex = 0;

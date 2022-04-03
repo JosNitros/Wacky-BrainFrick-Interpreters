@@ -44,6 +44,7 @@ struct timeline {
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
 		other.history = {};
+		return *this;
 	}
 
 	~timeline() {

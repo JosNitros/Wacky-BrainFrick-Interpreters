@@ -4,10 +4,14 @@
 #include <stack>
 
 std::vector<timeline> timelines;
-void advance() {
+void advance(std::string& is) {
 	for (int i = 0; i < timelines.size();i++) {
 		timeline& line=timelines[i];
 		line.advance(i);
+
+		if (i != 0 && line.instructionPtr >= is.data() + is.size()) {
+			timelines.erase(timelines.begin() + (i--)); // LOL!!!!
+		}
 	}
 }
 
@@ -177,6 +181,6 @@ void runCpp5dBF(std::string& inputString) {
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/
 	timelines.emplace_back(inputString.data());
 	while (timelines[0].instructionPtr < (inputString.data() + inputString.size())) {
-		advance();
+		advance(inputString);
 	}
 }
