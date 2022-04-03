@@ -3,7 +3,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-void runCpp5dBF(std::string inputString);
+
+#include "common.h"
+
+void runCpp5dBF(std::string& inputString);
 
 struct timeline {
 	std::vector<char*> ptrs;
@@ -13,7 +16,7 @@ struct timeline {
 	timeline() = delete;
 
 	timeline(char* instructions) {
-		memory = new char[30000];
+		memory = new char[BF_MEM_SIZE];
 		instructionPtr = instructions;
 		ptrs.push_back(memory);
 	}
@@ -36,6 +39,22 @@ struct timeline {
 
 	~timeline() {
 		delete[] memory;
+	}
+
+	timeline copy() {
+		timeline out = timeline(nullptr);
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			out.memory[i] = memory[i];
+		}
+
+		std::vector<char*> newPtrs;
+		for (char* ptr : ptrs) {
+			newPtrs.emplace_back(ptr - memory + out.memory);
+		}
+
+		out.ptrs = std::move(newPtrs);
+		out.instructionPtr = instructionPtr;
+		return out;
 	}
 
 	void advance();

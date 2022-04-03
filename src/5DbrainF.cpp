@@ -93,7 +93,7 @@ void timeline::advance() {
 	// @TODO kill timeline once done executing
 }
 
-void runCpp5dBF(std::string inputString) {
+void runCpp5dBF(std::string& inputString) {
 	//Initialize buffer
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/
 	timeline firstTimeline(inputString.data());
