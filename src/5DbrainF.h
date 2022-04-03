@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <stack>
 
 #include "common.h"
 
@@ -12,6 +13,7 @@ struct timeline {
 	std::vector<char*> ptrs;
 	char* memory;
 	char* instructionPtr;
+	std::stack<char*> returnIndex = {};
 
 	timeline() = delete;
 
@@ -25,6 +27,7 @@ struct timeline {
 	timeline(timeline&& other) noexcept {
 		memory = std::move(other.memory);
 		ptrs = std::move(other.ptrs);
+		returnIndex = std::move(other.returnIndex);
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
 	}
@@ -33,6 +36,7 @@ struct timeline {
 	timeline& operator=(timeline&& other) noexcept {
 		memory = std::move(other.memory);
 		ptrs = std::move(other.ptrs);
+		returnIndex = std::move(other.returnIndex);
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
 	}
@@ -54,6 +58,7 @@ struct timeline {
 
 		out.ptrs = std::move(newPtrs);
 		out.instructionPtr = instructionPtr;
+		out.returnIndex = returnIndex;
 		return out;
 	}
 
