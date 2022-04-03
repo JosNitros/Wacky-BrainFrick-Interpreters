@@ -3,6 +3,7 @@
 
 #include "brainF.h"
 #include "scislBF.h"
+#include "5DbrainF.h"
 
 void usage() {
 
@@ -67,7 +68,7 @@ int main(int argc, char* argv[]) {
 	if (file.is_open()) {
 		std::string asString = fileToString(file);
 		if (argc == 2) {
-			iterateString(asString);
+			runCppBF(asString);
 		}
 		else {
 			std::string flag = argv[1];
@@ -91,6 +92,7 @@ int main(int argc, char* argv[]) {
 				}
 				case 'M':
 					// @TODO multiverse timetravel
+					runCpp5dBF(asString);
 					break;
 				default:
 					usage();

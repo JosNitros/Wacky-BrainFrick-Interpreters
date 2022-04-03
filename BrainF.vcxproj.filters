@@ -59,6 +59,9 @@
     <ClCompile Include="src\scislBF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\5DbrainF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scisl\common.h">
@@ -95,6 +98,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\common.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\5DbrainF.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

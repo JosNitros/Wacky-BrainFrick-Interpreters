@@ -148,6 +148,7 @@
     <ClCompile Include="scisl\runtime\program.cpp" />
     <ClCompile Include="scisl\runtime\stl.cpp" />
     <ClCompile Include="scisl\runtime\stlOptimizations.cpp" />
+    <ClCompile Include="src\5DbrainF.cpp" />
     <ClCompile Include="src\brainF.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scislBF.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="scisl\runtime\program.h" />
     <ClInclude Include="scisl\runtime\stl.h" />
     <ClInclude Include="scisl\runtime\stlOptimizations.h" />
+    <ClInclude Include="src\5DbrainF.h" />
     <ClInclude Include="src\brainF.h" />
     <ClInclude Include="src\common.h" />
     <ClInclude Include="src\scislBF.h" />

@@ -2,7 +2,7 @@
 #define _BRAINF_H
 #include <iostream>
 #include <fstream>
-void iterateString(std::string inputString);
+void runCppBF(std::string inputString);
 
 
 #endif

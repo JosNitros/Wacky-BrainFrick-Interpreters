@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stack>
 
-void iterateString(std::string inputString) {
+void runCppBF(std::string inputString) {
 	//Initialize buffer
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/Brainfuck
 	char array[30000] = {0};
