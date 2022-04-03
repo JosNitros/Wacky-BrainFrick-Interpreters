@@ -9,11 +9,8 @@ struct timeline {
 	std::vector<char*> ptrs;
 	char* memory;
 	char* instructionPtr;
-};
 
-struct timelines {
-	std::vector<timeline> timelines;
+	void advance();
 };
-
 
 #endif
