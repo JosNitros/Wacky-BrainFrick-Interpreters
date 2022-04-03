@@ -1,0 +1,201 @@
+set callstack ""
+= cur 0
+
+set pushParam 0
+def push
+	$push callstack pushParam
+endblock
+
+set popRet 0
+def pop
+	$pop callstack popRet
+endblock
+
+= memory ""
+= memsize #BF_MEM_SIZE
+= ptr 0
+$resize memory memsize
+
+; BF's >
+def bf>
+	+= ptr 1
+	- tmp memsize 1
+	> bool ptr tmp
+	cjmp overflow bool
+		break 0
+	label overflow
+		= ptr 0
+endblock
+
+; BF's <
+def bf<
+	-= ptr 1
+	< bool ptr 0
+	cjmp underflow bool
+		break 0
+	label underflow
+		- tmp memsize 1
+		= ptr tmp
+endblock
+
+; BF's +
+def bf+
+	chrat tmp memory ptr
+	+= tmp 1
+	> bool tmp 127
+	cjmp f-o bool
+	jmp set+
+	label f-o
+		= tmp -128
+	label set+
+	chrset memory tmp ptr
+endblock
+
+; BF's -
+def bf-
+	chrat tmp memory ptr
+	-= tmp 1
+	< bool tmp -128
+	cjmp f-u bool
+	jmp set-
+	label f-u
+		= tmp 127
+	label set-
+	chrset memory tmp ptr
+endblock
+
+; BF's .
+def bf.
+	chrat tmp memory ptr
+	= schr "0"
+	$resize schr 1
+	chrset schr tmp 0
+	print schr
+endblock
+
+; BF's ,
+def bf,
+	= chr 0
+	$cin chr
+	chrset memory chr ptr
+endblock
+
+; BF's [
+def bf[
+	chrat tmp memory ptr
+	== bool tmp 0
+	cjmp next bool
+		= pushParam cur
+		call push
+		break 0
+	label next
+		= off 0
+		label fnd
+			+= cur 1
+			strlen len $inpt
+			-= len 1
+			> bool cur len
+			cjmp err bool
+
+			chrat tmp $inpt cur
+
+;check for [
+			== bool tmp 91	
+			cjmp ao bool
+				jmp n[
+			label ao
+				+= off 1
+				jmp fnd
+			label n[
+;check for ]
+				== bool tmp 93
+				cjmp bo bool
+					jmp n]
+				label bo
+					== bool off 0
+					cjmp done bool
+						-= off 1
+						jmp fnd
+					label done
+						break 0
+				label n]
+					jmp fnd
+	label err
+		exit -1
+endblock
+
+; BF's ]
+def bf]
+	strlen errCheck callstack
+	== bool errCheck 0
+	cjmp ohno bool
+	jmp notohno
+	label ohno
+		exit -1
+	label notohno
+
+	call pop
+	chrat tmp memory ptr
+	== bool tmp 0
+	cjmp past tmp
+		break 0
+	label past
+		= cur popRet
+		-= cur 1
+endblock
+
+
+label loop
+	strlen len $inpt
+	-= len 1
+	> bool cur len
+	cjmp end bool
+	chrat chr $inpt cur
+	== bool chr 62
+	cjmp b> bool
+	== bool chr 60
+	cjmp b< bool
+	== bool chr 43
+	cjmp b+ bool
+	== bool chr 45
+	cjmp b- bool
+	== bool chr 46
+	cjmp b. bool
+	== bool chr 44
+	cjmp b, bool
+	== bool chr 91
+	cjmp b[ bool
+	== bool chr 93
+	cjmp b] bool
+	jmp e
+
+	label b>
+		call bf>
+		jmp e
+	label b<
+		call bf<
+		jmp e
+	label b+
+		call bf+
+		jmp e
+	label b-
+		call bf-
+		jmp e
+	label b.
+		call bf.
+		jmp e
+	label b,
+		call bf,
+		jmp e
+	label b[
+		call bf[
+		jmp e
+	label b]
+		call bf]
+		jmp e
+
+	label e
+	+= cur 1
+	jmp loop
+label end
+exit 1

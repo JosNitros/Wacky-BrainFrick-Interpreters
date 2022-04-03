@@ -94,6 +94,9 @@
     <ClInclude Include="src\scislBF.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\common.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\bf.scisl">

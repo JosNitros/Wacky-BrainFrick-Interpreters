@@ -209,7 +209,7 @@ namespace scisl
 		else
 		{
 			auto& funcs = getFuncTable();
-			auto it = funcs.find(things[0].substr(1));
+			auto it = funcs.find(funcName.substr(1)); // quick fix
 			if (it != funcs.end())
 			{
 				opt.meta = (*it).second;
@@ -407,6 +407,11 @@ namespace scisl
 				curBlockEnd = loc;
 			}
 
+			if (cur.meta.funcID == stlFuncs::blockend) { // quick patch
+				curBlockStart = 0;
+				curBlockEnd = instructions.size() - 1;
+			}
+
 			if (cur.meta.funcID == stlFuncs::call)
 			{
 				std::string& str = SCISL_CAST_STRING(cur.instr.arguments[0].val.val);
@@ -481,6 +486,7 @@ namespace scisl
 				delete opt;
 				return nullptr;
 			}
+
 
 			removeUnusedLabels(instructions);
 			evaluateConstants(instructions, vars);

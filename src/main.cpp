@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
 		// Read input from file
 		std::string asString = fileToString(file);
 		iterateString(asString);
+    return runScislBF(asString);
 	}
 
 	else {
