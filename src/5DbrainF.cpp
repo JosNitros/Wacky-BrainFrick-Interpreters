@@ -29,11 +29,7 @@ void timeline::advance(int& index) {
 		break;
 	case '+':
 	{
-		char* t = new char[BF_MEM_SIZE];
-		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
-			t[i] = memory[i];
-		}
-		history.push_back(t);
+		history.push_back(copyMem());
 
 		for (char* ptr : this->ptrs) {
 			++(*ptr);
@@ -42,11 +38,7 @@ void timeline::advance(int& index) {
 	}
 	case '-':
 	{
-		char* t = new char[BF_MEM_SIZE];
-		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
-			t[i] = memory[i];
-		}
-		history.push_back(t);
+		history.push_back(copyMem());
 
 		for (char* ptr : this->ptrs) {
 			--(*ptr);
@@ -60,11 +52,7 @@ void timeline::advance(int& index) {
 		break;
 	case ',':
 	{
-		char* t = new char[BF_MEM_SIZE];
-		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
-			t[i] = memory[i];
-		}
-		history.push_back(t);
+		history.push_back(copyMem());
 
 		int c = getchar();
 		for (char* ptr : this->ptrs) {
@@ -173,7 +161,6 @@ void timeline::advance(int& index) {
 		break;
 	}
 	this->instructionPtr++;
-	// @TODO kill timeline once done executing
 }
 
 void runCpp5dBF(std::string& inputString) {

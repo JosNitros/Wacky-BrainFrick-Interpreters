@@ -91,7 +91,6 @@ int main(int argc, char* argv[]) {
 					break;
 				}
 				case 'M':
-					// @TODO multiverse timetravel
 					runCpp5dBF(asString);
 					break;
 				default:

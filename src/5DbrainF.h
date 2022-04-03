@@ -20,6 +20,9 @@ struct timeline {
 
 	timeline(char* instructions) {
 		memory = new char[BF_MEM_SIZE];
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			memory[i] = 0;
+		}
 		instructionPtr = instructions;
 		ptrs.push_back(memory);
 	}
@@ -52,6 +55,17 @@ struct timeline {
 		for (char* h : history) {
 			delete[] h;
 		}
+	}
+
+	char* copyMem() {
+		/*
+		char* t = new char[BF_MEM_SIZE];
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			t[i] = memory[i];
+		}
+		return t;
+		*/
+		return nullptr;
 	}
 
 	timeline copy() {
