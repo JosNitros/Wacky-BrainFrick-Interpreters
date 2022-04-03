@@ -27,11 +27,12 @@ struct timeline {
 		ptrs.push_back(memory);
 	}
 
-	timeline(const timeline& ) = delete;
+	timeline(const timeline&) = delete;
 	timeline(timeline&& other) noexcept {
 		memory = std::move(other.memory);
 		ptrs = std::move(other.ptrs);
 		returnIndex = std::move(other.returnIndex);
+		instructionPtr = std::move(other.instructionPtr);
 		history = std::move(other.history);
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
@@ -40,13 +41,10 @@ struct timeline {
 
 	timeline& operator=(const timeline&) = delete;
 	timeline& operator=(timeline&& other) noexcept {
-		memory = std::move(other.memory);
-		ptrs = std::move(other.ptrs);
-		returnIndex = std::move(other.returnIndex);
-		history = std::move(other.history);
-		other.memory = nullptr;
-		other.instructionPtr = nullptr;
-		other.history = {};
+		std::swap(memory, other.memory);
+		std::swap(ptrs, other.ptrs);
+		std::swap(returnIndex, other.returnIndex);
+		std::swap(history, other.history);
 		return *this;
 	}
 
@@ -58,14 +56,11 @@ struct timeline {
 	}
 
 	char* copyMem() {
-		/*
 		char* t = new char[BF_MEM_SIZE];
 		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
 			t[i] = memory[i];
 		}
 		return t;
-		*/
-		return nullptr;
 	}
 
 	timeline copy() {

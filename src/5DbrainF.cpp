@@ -18,12 +18,12 @@ void advance(std::string& is) {
 void timeline::advance(int& index) {
 	switch (*this->instructionPtr) {
 	case '>':
-		for (char* ptr : this->ptrs) {
+		for (char*& ptr : this->ptrs) {
 			++ptr;
 		}
 		break;
 	case '<':
-		for (char* ptr : this->ptrs) {
+		for (char*& ptr : this->ptrs) {
 			--ptr;
 		}
 		break;
@@ -112,21 +112,24 @@ void timeline::advance(int& index) {
 	case '(':
 	{
 		//create new parallel universe below current one (if more universes exist below current one, move them down)
-		timelines.insert(timelines.begin() + index + 1, copy());
+		timeline cpy = copy();
+		timelines.insert(timelines.begin() + index + 1, std::move(cpy));
 		timelines[index + 1].instructionPtr++;
+
+		// WE LOVE INVALIDATION, LETS GOO!!
+		timeline& cur = timelines[index];
 
 		//then move current one past parenthesis
 		int leftParenthesis = 0;
-		for (; ((*this->instructionPtr) != ']' || leftParenthesis != 0); instructionPtr++) {
-			if (*instructionPtr == '(') {
+		cur.instructionPtr++;
+		for (; *cur.instructionPtr != ')' || leftParenthesis != 0; cur.instructionPtr++) {
+			if (*cur.instructionPtr == '(') {
 				leftParenthesis += 1;
 			}
-			else if (*instructionPtr == ')') {
+			else if (*cur.instructionPtr == ')') {
 				leftParenthesis -= 1;
 			}
-
 		}
-
 		break;
 	}
 	case ')':
@@ -142,7 +145,9 @@ void timeline::advance(int& index) {
 				timelines[index + 1].ptrs.push_back(ptr);
 			}
 		}
-		ptrs = {};
+		else {
+			ptrs = {};
+		}
 		break;
 	case '^':
 		if (!(index == 0)) {
@@ -150,13 +155,16 @@ void timeline::advance(int& index) {
 				timelines[index -1].ptrs.push_back(ptr);
 			}
 		}
-		ptrs = {};
+		else {
+			ptrs = {};
+		}
 		break;
 
 	case '@':
 		if (index + 1 < timelines.size() && timelines[index+1].ptrs.size() > 0) {
 			instructionPtr--;
 		}
+		break;
 	default:
 		break;
 	}
