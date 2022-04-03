@@ -42,7 +42,7 @@ struct timeline {
 	}
 
 	timeline copy() {
-		timeline out = timeline(nullptr);
+		timeline out(nullptr);
 		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
 			out.memory[i] = memory[i];
 		}
