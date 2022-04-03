@@ -160,6 +160,11 @@ void timeline::advance(int& index) {
 		}
 		ptrs = {};
 		break;
+
+	case '@':
+		if (index + 1 < timelines.size() && timelines[index+1].ptrs.size() > 0) {
+			instructionPtr--;
+		}
 	default:
 		break;
 	}
