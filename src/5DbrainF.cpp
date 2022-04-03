@@ -92,14 +92,8 @@ void timeline::advance() {
 void runCpp5dBF(std::string inputString) {
 	//Initialize buffer
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/
-	timelines timelines;
 	timeline firstTimeline(inputString.data());
 
-
-	char array[30000] = { 0 };
-	char* ptr = array;
-	int lastIndex = inputString.length() - 1;
-	int currentIndex = 0;
 	//use stack to go back to beginning of each loop
 	std::stack<int> returnIndex;
 

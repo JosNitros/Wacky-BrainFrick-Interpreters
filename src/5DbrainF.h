@@ -23,8 +23,7 @@ struct timeline {
 	}
 	~timeline(){
 		delete[] memory;
-	};
-};
+	}
 
 	void advance();
 };
