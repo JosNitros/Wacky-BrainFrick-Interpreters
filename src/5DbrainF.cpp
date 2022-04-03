@@ -24,15 +24,31 @@ void timeline::advance(int& index) {
 		}
 		break;
 	case '+':
+	{
+		char* t = new char[BF_MEM_SIZE];
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			t[i] = memory[i];
+		}
+		history.push_back(t);
+
 		for (char* ptr : this->ptrs) {
 			++(*ptr);
 		}
 		break;
+	}
 	case '-':
+	{
+		char* t = new char[BF_MEM_SIZE];
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			t[i] = memory[i];
+		}
+		history.push_back(t);
+
 		for (char* ptr : this->ptrs) {
 			--(*ptr);
 		}
 		break;
+	}
 	case '.':
 		for (char* ptr : this->ptrs) {
 			putchar(*ptr);
@@ -40,6 +56,12 @@ void timeline::advance(int& index) {
 		break;
 	case ',':
 	{
+		char* t = new char[BF_MEM_SIZE];
+		for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+			t[i] = memory[i];
+		}
+		history.push_back(t);
+
 		int c = getchar();
 		for (char* ptr : this->ptrs) {
 			*ptr = c;
