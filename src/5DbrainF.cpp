@@ -144,6 +144,22 @@ void timeline::advance(int& index) {
 
 		}
 		break;
+	case 'v':
+		if (!(index + 1 >= timelines.size())) {
+			for (char *ptr : ptrs) {
+				timelines[index + 1].ptrs.push_back(ptr);
+			}
+		}
+		ptrs = {};
+		break;
+	case '^':
+		if (!(index == 0)) {
+			for (char* ptr : ptrs) {
+				timelines[index -1].ptrs.push_back(ptr);
+			}
+		}
+		ptrs = {};
+		break;
 	default:
 		break;
 	}
