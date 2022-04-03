@@ -38,12 +38,15 @@ void timeline::advance() {
 		}
 		break;
 	case ',':
+	{
 		int c = getchar();
 		for (char* ptr : this->ptrs) {
 			*ptr = c;
 		}
 		break;
+	}
 	case '[': // @TODO
+	{
 		//skip over loop if value at pointer = 0
 		bool allZero = true;
 		for (char* ptr : this->ptrs) {
@@ -73,6 +76,7 @@ void timeline::advance() {
 			returnIndex.push(this->instructionPtr);
 		}
 		break;
+	}
 	case ']': // @TODO
 		//Go back to matching bracket (assume this is skipped over if initial loop condition is false
 		if (!returnIndex.empty()) {
