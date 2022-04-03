@@ -9,6 +9,22 @@ struct timeline {
 	std::vector<char*> ptrs;
 	char* memory;
 	char* instructionPtr;
+	timeline(char* instructions) {
+		memory = new char[30000];
+		instructionPtr = instructions;
+		ptrs.push_back(memory);
+	}
+	timeline(const timeline& )=delete;
+	timeline(timeline&& other) noexcept {
+		memory = std::move(other.memory);
+		ptrs = std::move(other.ptrs);
+		other.memory = nullptr;
+		other.instructionPtr = nullptr;
+	}
+	~timeline(){
+		delete[] memory;
+	};
+};
 
 	void advance();
 };
