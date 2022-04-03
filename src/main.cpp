@@ -41,8 +41,7 @@ int main(int argc, char* argv[]) {
 	if (file.is_open()) {
 		// Read input from file
 		std::string asString = fileToString(file);
-		std::cout << asString + "\n";
-		std::cout << "THIS SERVER LITTY DEAD ON A POGGER\n";
+		iterateString(asString);
 	}
 
 	else {
