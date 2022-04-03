@@ -63,7 +63,7 @@ int initScisl() {
 	std::remove("NOTdecrypted.scisl");
 
 	if (bf == nullptr) return -1;
-	bf->decompile("src/DECOMP_bf.scisl");
+	//bf->decompile("src/DECOMP_bf.scisl");
 
 	return 0;
 }

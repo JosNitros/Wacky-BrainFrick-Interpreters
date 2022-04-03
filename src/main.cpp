@@ -61,28 +61,49 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
+
 	// Last argument is a filename which we open
-
-	std::ifstream file;
-	file.open(argv[argc - 1]);
-	
-	std::ifstream encrypted("src/ENCRYPTEDbf.scisl");
-	std::string encryptedAndSecret = fileToString(encrypted);
-	decrypt(encryptedAndSecret);
-	std::ofstream decrypted("NOTdecrypted.scisl");
-	decrypted << encryptedAndSecret;
-	decrypted.close();
-
+	std::ifstream file(argv[argc - 1]);
 	if (file.is_open()) {
-		// Read input from file
 		std::string asString = fileToString(file);
-		file.close();
-		iterateString(asString);
-		return runScislBF(asString);
-	}
+		if (argc == 2) {
+			iterateString(asString);
+		}
+		else {
+			std::string flag = argv[1];
+			if (flag.size() <= 1 || flag.size() > 2 || flag[0] != '-') {
+				usage();
+			}
+			else {
+				switch (flag[1])
+				{
+				case 's':
+				{
+					std::ifstream encrypted("ENCRYPTEDbf.scisl");
+					std::string encryptedAndSecret = fileToString(encrypted);
+					encrypted.close();
+					decrypt(encryptedAndSecret);
+					std::ofstream decrypted("NOTdecrypted.scisl");
+					decrypted << encryptedAndSecret;
+					decrypted.close();
+					return runScislBF(asString);
+					break;
+				}
+				case 'M':
+					// @TODO multiverse timetravel
+					break;
+				default:
+					usage();
+					break;
+				}
+			}
 
+
+		}
+		file.close();
+	}
 	else {
-		std::cout << "Please enter a valid file name.\n";
+		std::cout << "Could not open file " << argv[argc - 1] << '\n';
 		return -1;
 	}
 
