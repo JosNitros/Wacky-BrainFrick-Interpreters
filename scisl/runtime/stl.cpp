@@ -167,7 +167,7 @@ namespace scisl
 				break;
 			}
 		}
-		std::cout << '\n';
+		//std::cout << '\n'; //not a fix, just a hack
 	}
 
 	void substr(program& process, const instruction& instr)
@@ -175,7 +175,7 @@ namespace scisl
 		value& c = instr.arguments[0].getValue();
 		value& str = instr.arguments[1].getValue();
 		value& start = instr.arguments[2].getValue();
-		value& end = instr.arguments[2].getValue();
+		value& end = instr.arguments[3].getValue(); //quick fix
 		//thank type checking
 		c = SCISL_CAST_STRING(str.val).substr(SCISL_CAST_INT(start.val), SCISL_CAST_INT(end.val) - SCISL_CAST_INT(start.val));
 	}

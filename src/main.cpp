@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
 		std::string asString = fileToString(file);
 		std::cout << asString + "\n";
 		std::cout << "THIS SERVER LITTY DEAD ON A POGGER\n";
+		return runScislBF(asString);
 	}
 
 	else {
