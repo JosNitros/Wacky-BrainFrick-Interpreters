@@ -14,6 +14,7 @@ struct timeline {
 	char* memory;
 	char* instructionPtr;
 	std::stack<char*> returnIndex = {};
+	std::vector<char*> history = {};
 
 	timeline() = delete;
 
@@ -28,8 +29,10 @@ struct timeline {
 		memory = std::move(other.memory);
 		ptrs = std::move(other.ptrs);
 		returnIndex = std::move(other.returnIndex);
+		history = std::move(other.history);
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
+		other.history = {};
 	}
 
 	timeline& operator=(const timeline&) = delete;
@@ -37,12 +40,17 @@ struct timeline {
 		memory = std::move(other.memory);
 		ptrs = std::move(other.ptrs);
 		returnIndex = std::move(other.returnIndex);
+		history = std::move(other.history);
 		other.memory = nullptr;
 		other.instructionPtr = nullptr;
+		other.history = {};
 	}
 
 	~timeline() {
 		delete[] memory;
+		for (char* h : history) {
+			delete[] h;
+		}
 	}
 
 	timeline copy() {
@@ -56,9 +64,19 @@ struct timeline {
 			newPtrs.emplace_back(ptr - memory + out.memory);
 		}
 
+		std::vector<char*> newHistory;
+		for (char* ptr : history) {
+			char* t = new char[BF_MEM_SIZE];
+			for (unsigned int i = 0; i < BF_MEM_SIZE; i++) {
+				t[i] = ptr[i];
+			}
+			newHistory.push_back(t);
+		}
+
 		out.ptrs = std::move(newPtrs);
 		out.instructionPtr = instructionPtr;
 		out.returnIndex = returnIndex;
+		out.history = std::move(newHistory);
 		return out;
 	}
 

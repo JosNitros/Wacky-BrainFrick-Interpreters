@@ -46,7 +46,7 @@ void timeline::advance(int& index) {
 		}
 		break;
 	}
-	case '[': // @TODO
+	case '[':
 	{
 		//skip over loop if value at pointer = 0
 		bool allZero = true;
@@ -78,7 +78,7 @@ void timeline::advance(int& index) {
 		}
 		break;
 	}
-	case ']': // @TODO
+	case ']':
 		//Go back to matching bracket (assume this is skipped over if initial loop condition is false
 		if (!returnIndex.empty()) {
 			this->instructionPtr = returnIndex.top() - 1;
@@ -86,12 +86,21 @@ void timeline::advance(int& index) {
 			returnIndex.pop();
 		}
 		break;
-		//@TODO timetravel instructions
+	case '~':
+	{
+		if (history.size() > 0) {
+			delete[] memory;
+			memory = history.back();
+			history.pop_back();
+		}
+		break;
+	}
 	case '(':
+	{
 		//create new parallel universe below current one (if more universes exist below current one, move them down)
 		timelines.insert(timelines.begin() + index + 1, copy());
 		timelines[index + 1].instructionPtr++;
-		
+
 		//then move current one past parenthesis
 		int leftParenthesis = 0;
 		for (; ((*this->instructionPtr) != ']' || leftParenthesis != 0); instructionPtr++) {
@@ -105,6 +114,7 @@ void timeline::advance(int& index) {
 		}
 
 		break;
+	}
 	case ')':
 		//if not the main timeline, delete current universe  (if else do nothing)
 		if (index != 0) {
