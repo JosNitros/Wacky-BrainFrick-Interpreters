@@ -57,7 +57,7 @@ struct timeline {
 		return out;
 	}
 
-	void advance();
+	void advance(int &index);
 };
 
 #endif

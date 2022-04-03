@@ -5,12 +5,13 @@
 
 std::vector<timeline> timelines;
 void advance() {
-	for (timeline& line : timelines) {
-		line.advance();
+	for (int i = 0; i < timelines.size();i++) {
+		timeline& line=timelines[i];
+		line.advance(i);
 	}
 }
 
-void timeline::advance() {
+void timeline::advance(int& index) {
 	switch (*this->instructionPtr) {
 	case '>':
 		for (char* ptr : this->ptrs) {
@@ -86,6 +87,31 @@ void timeline::advance() {
 		}
 		break;
 		//@TODO timetravel instructions
+	case '(':
+		//create new parallel universe below current one (if more universes exist below current one, move them down)
+		timelines.insert(timelines.begin() + index + 1, copy());
+		timelines[index + 1].instructionPtr++;
+		
+		//then move current one past parenthesis
+		int leftParenthesis = 0;
+		for (; ((*this->instructionPtr) != ']' || leftParenthesis != 0); instructionPtr++) {
+			if (*instructionPtr == '(') {
+				leftParenthesis += 1;
+			}
+			else if (*instructionPtr == ')') {
+				leftParenthesis -= 1;
+			}
+
+		}
+
+		break;
+	case ')':
+		//if not the main timeline, delete current universe  (if else do nothing)
+		if (index != 0) {
+			timelines.erase(timelines.begin()+(index--)); // LOL!!!!
+
+		}
+		break;
 	default:
 		break;
 	}
@@ -96,69 +122,8 @@ void timeline::advance() {
 void runCpp5dBF(std::string& inputString) {
 	//Initialize buffer
 	//HUGE shoutout to BrainFr*ak wikipedia page https://en.wikipedia.org/wiki/
-	timeline firstTimeline(inputString.data());
-
-	//use stack to go back to beginning of each loop
-	std::stack<int> returnIndex;
-
-	//need index for moving backwards in string when doing loops
-	for (currentIndex; currentIndex <= lastIndex; currentIndex++) {
-		//Check every possible character
-		//std::cout << inputString.at(currentIndex);
-		switch (inputString.at(currentIndex)) {
-		case '>':
-			++ptr;
-			break;
-		case '<':
-			--ptr;
-			break;
-		case '+':
-			++ * ptr;
-			break;
-		case '-':
-			-- * ptr;
-			break;
-		case '.':
-			putchar(*ptr);
-			break;
-		case ',':
-			*ptr = getchar();
-			break;
-		case '[':
-			//skip over loop if value at pointer = 0
-			if (!*ptr) {
-				//find matching bracket and go past it
-				int leftBrackets = 0;
-				currentIndex += 1;
-				for (currentIndex; (inputString.at(currentIndex) != ']' || leftBrackets != 0); currentIndex++) {
-					//std::cout << inputString.at(currentIndex);
-					if (inputString.at(currentIndex) == '[') {
-						leftBrackets += 1;
-					}
-					else if (inputString.at(currentIndex) == ']') {
-						leftBrackets -= 1;
-					}
-
-				}
-			}
-			else {
-				//push returnIndex on stack
-				returnIndex.push(currentIndex);
-			}
-			break;
-		case ']':
-			//Go back to matching bracket (assume this is skipped over if initial loop condition is false
-			if (!returnIndex.empty()) {
-				currentIndex = returnIndex.top() - 1;
-				//subtract 1 from index since it adds 1 after each iteration
-				returnIndex.pop();
-			}
-			break;
-
-		//huge HUGE shoutout to https://esolangs.org/wiki/5D_Brainfuck_With_Multiverse_Time_Travel
-
-		break;
-
-		}
+	timelines.emplace_back(inputString.data());
+	while (timelines[0].instructionPtr < (inputString.data() + inputString.size())) {
+		advance();
 	}
 }
