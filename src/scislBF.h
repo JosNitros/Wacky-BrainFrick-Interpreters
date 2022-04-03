@@ -5,6 +5,4 @@
 
 int runScislBF(std::string& ipt);
 
-
-
 #endif

@@ -26,27 +26,84 @@ std::string fileToString(std::ifstream& file) {
 	return opt;
 }
 
+
+const unsigned char hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1 = 0x1E;
+const unsigned char hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2 = 0xE7;
+
+// Nobody will ever figure out how to undo this encryption, it's too good
+void encrypt(std::string& ipt)
+{
+	for (unsigned int i = 0; i < ipt.size(); i++) {
+		if (i % 2 == 0) {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1;
+		}
+		else {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2;
+		}
+	}	
+}
+
+void decrypt(std::string& ipt)
+{
+	for (unsigned int i = 0; i < ipt.size(); i++) {
+		if (i % 2 == 0) {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart1;
+		}
+		else {
+			ipt[i] ^= hyperSecretEncryptionKeyThatNobodyWillEverFindOutPart2;
+		}
+	}
+}
+
 int main(int argc, char* argv[]) {
 	if (argc <= 1) {
 		usage();
 		return 0;
 	}
 
+
 	// Last argument is a filename which we open
-
-	std::ifstream file;
-	file.open(argv[argc - 1]);
-	
-	
+	std::ifstream file(argv[argc - 1]);
 	if (file.is_open()) {
-		// Read input from file
 		std::string asString = fileToString(file);
-		iterateString(asString);
-    return runScislBF(asString);
-	}
+		if (argc == 2) {
+			iterateString(asString);
+		}
+		else {
+			std::string flag = argv[1];
+			if (flag.size() <= 1 || flag.size() > 2 || flag[0] != '-') {
+				usage();
+			}
+			else {
+				switch (flag[1])
+				{
+				case 's':
+				{
+					std::ifstream encrypted("ENCRYPTEDbf.scisl");
+					std::string encryptedAndSecret = fileToString(encrypted);
+					encrypted.close();
+					decrypt(encryptedAndSecret);
+					std::ofstream decrypted("NOTdecrypted.scisl");
+					decrypted << encryptedAndSecret;
+					decrypted.close();
+					return runScislBF(asString);
+					break;
+				}
+				case 'M':
+					// @TODO multiverse timetravel
+					break;
+				default:
+					usage();
+					break;
+				}
+			}
 
+
+		}
+		file.close();
+	}
 	else {
-		std::cout << "Please enter a valid file name.\n";
+		std::cout << "Could not open file " << argv[argc - 1] << '\n';
 		return -1;
 	}
 
