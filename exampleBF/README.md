@@ -1,0 +1,1 @@
+All examples were taken from https://esolangs.org/wiki/Brainfuck and https://esolangs.org/wiki/5D_Brainfuck_With_Multiverse_Time_Travel

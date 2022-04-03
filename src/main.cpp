@@ -6,7 +6,10 @@
 #include "5DbrainF.h"
 
 void usage() {
-
+	std::cout << "Using the command line!!!\n";
+	std::cout << "\"filename\" : runs that file using basic C++ interpreter.\n";
+	std::cout << "-s \"filename\" : runs that file using Scisl interpreter.\n";
+	std::cout << "-M \"filename\" : runs that file using basic C++ interpreter.\n\n";
 }
 
 std::string fileToString(std::ifstream& file) {
@@ -57,7 +60,7 @@ void decrypt(std::string& ipt)
 }
 
 int main(int argc, char* argv[]) {
-	if (argc <= 1) {
+	if (argc <= 1 || argc > 3) {
 		usage();
 		return 0;
 	}
